@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="client-nojs">
+<head>
+<title>Arduino Workshop for the Curious/Lesson4 - Electromagnetic Field</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.20.1" />
+<link rel="shortcut icon" href="../../../../misc/favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="../../../../../opensearch_desc.php" title="Electromagnetic Field (en)" />
+<link rel="EditURI" type="application/rsd+xml" href="api.php?action=rsd" />
+<link rel="copyright" href="../../../../../COPYING.html" />
+<link rel="alternate" type="application/atom+xml" title="Electromagnetic Field Atom feed" href="http://wiki.emfcamp.org/w/index.php?title=Special:RecentChanges&amp;feed=atom" />
+<link rel="stylesheet" href="http://wiki.emfcamp.org/w/load.php?debug=false&amp;lang=en&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.monobook&amp;only=styles&amp;skin=monobook&amp;*" />
+<!--[if IE 6]><link rel="stylesheet" href="../../../../skins/monobook/IE60Fixes.css?303" media="screen" /><![endif]-->
+<!--[if IE 7]><link rel="stylesheet" href="../../../../skins/monobook/IE70Fixes.css?303" media="screen" /><![endif]--><meta name="ResourceLoaderDynamicStyles" content="" />
+<style>a{text-decoration:none}#toc{display:none}.editsection{display:none}
+/* cache key: emfwiki:resourceloader:filter:minify-css:7:976783b4e38d41c66f69f0c83dc46169 */</style>
+
+<script src="http://wiki.emfcamp.org/w/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=monobook&amp;*"></script>
+<script>if(window.mw){
+mw.config.set({"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":false,"wgNamespaceNumber":0,"wgPageName":"Arduino_Workshop_for_the_Curious/Lesson4","wgTitle":"Arduino Workshop for the Curious/Lesson4","wgCurRevisionId":2824,"wgArticleId":476,"wgIsArticle":true,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":[],"wgBreakFrames":false,"wgPageContentLanguage":"en","wgSeparatorTransformTable":["",""],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","January","February","March","April","May","June","July","August","September","October","November","December"],"wgMonthNamesShort":["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"wgRelevantPageName":"Arduino_Workshop_for_the_Curious/Lesson4","wgRestrictionEdit":[],"wgRestrictionMove":[],"sfgAutocompleteValues":[],"sfgAutocompleteOnAllChars":false,"sfgFieldProperties":[],"sfgDependentFields":[],"sfgShowOnSelect":[],"sfgScriptPath":"/w/extensions/SemanticForms"});
+}</script><script>if(window.mw){
+mw.loader.implement("user.options",function(){mw.user.options.set({"skin":"monobook","editsection":0});;},{},{});mw.loader.implement("user.tokens",function(){mw.user.tokens.set({"editToken":"+\\","watchToken":false});;},{},{});
+/* cache key: emfwiki:resourceloader:filter:minify-js:7:d50ed6faa6d35e0fe3e6a43155d953fd */
+}</script>
+
+		<link rel="alternate" type="application/rdf+xml" title="Arduino Workshop for the Curious/Lesson4" href="http://wiki.emfcamp.org/w/index.php?title=Special:ExportRDF/Arduino_Workshop_for_the_Curious/Lesson4&amp;xmlmime=rdf" />
+</head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Arduino_Workshop_for_the_Curious_Lesson4 skin-monobook action-view">
+<div id="globalWrapper">
+<div id="column-content"><div id="content" class="mw-body-primary">
+	<a id="top"></a>
+	
+	<h1 id="firstHeading" class="firstHeading"><span dir="auto">Arduino Workshop for the Curious/Lesson4</span></h1>
+	<div id="bodyContent" class="mw-body">
+		<div id="siteSub">From Electromagnetic Field</div>
+		<div id="contentSub"><span class="subpages">&lt; <a href="../../../../articles/a/r/d/Arduino_Workshop_for_the_Curious.html" title="Arduino Workshop for the Curious">Arduino Workshop for the Curious</a></span></div>
+		<!-- start content -->
+<div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr"><table id="toc" class="toc"><tr><td><div id="toctitle"><h2>Contents</h2></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Communicating_with_your_Computer"><span class="tocnumber">1</span> <span class="toctext">Communicating with your Computer</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="#Making_a_Sensor"><span class="tocnumber">2</span> <span class="toctext">Making a Sensor</span></a></li>
+<li class="toclevel-1 tocsection-3"><a href="#Reading_Analog_Signals"><span class="tocnumber">3</span> <span class="toctext">Reading Analog Signals</span></a></li>
+<li class="toclevel-1 tocsection-4"><a href="#Detecting_Dots_and_Dashes"><span class="tocnumber">4</span> <span class="toctext">Detecting Dots and Dashes</span></a></li>
+</ul>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Communicating_with_your_Computer"> Communicating with your Computer</span></h2>
+<p>Communication with your computer, over the USB cable, can be done by using the Arduino's Serial features. Serial communication needs setting up, to tell it what speed to communicate at. This is done with this line of code:
+</p>
+<pre>Serial.begin(9600); // Speed of 9600 bits per second
+</pre>
+<p>Then to send messages to your computer you use one of two functions:
+</p>
+<pre>Serial.print("Hello "); // This sends the message given to the computer
+Serial.println("World!") // Does the same as above, but adds a newline onto the end (so the next message will appear on another line)
+</pre>
+<p>Here is a simple hello world program:
+</p>
+<pre><span style="color:#800000; font-weight:bold;">void</span> setup<span style="color:#808030;">(</span><span style="color:#808030;">)</span> <span style="color:#800080;">{</span>
+  Serial<span style="color:#808030;">.</span>begin<span style="color:#808030;">(</span><span style="color:#008c00;">9600</span><span style="color:#808030;">)</span><span style="color:#800080;">;</span>
+  Serial<span style="color:#808030;">.</span>print<span style="color:#808030;">(</span><span style="color:#800000;">"</span><span style="color:#0000e6;">Hello </span><span style="color:#800000;">"</span><span style="color:#808030;">)</span><span style="color:#800080;">;</span>
+  Serial<span style="color:#808030;">.</span>println<span style="color:#808030;">(</span><span style="color:#800000;">"</span><span style="color:#0000e6;">World!</span><span style="color:#800000;">"</span><span style="color:#808030;">)</span><span style="color:#800080;">;</span>
+<span style="color:#800080;">}</span>
+
+<span style="color:#800000; font-weight:bold;">void</span> loop<span style="color:#808030;">(</span><span style="color:#808030;">)</span> <span style="color:#800080;">{</span>
+  <span style="color:#696969;">// Nothing</span>
+<span style="color:#800080;">}</span>
+</pre>
+<p>To see the text being sent from your Arduino to your computer press the <i>Serial Monitor</i> button in the Arduino software (shown as 1 in the image below). Make sure your computer's serial speed is set correctly (shown as 2 in the image below).
+</p><p><a href="../../../../articles/s/e/r/File:Serial_Arduino_Comms_Screenshot.png.html" class="image"><img alt="Serial Arduino Comms Screenshot.png" src="../../../../images/3/2F/3/3/32/Serial_Arduino_Comms_Screenshot.png" width="497" height="578" /></a>
+</p>
+<table class="wikitable" width="600px">
+
+<tr>
+<td>
+<p><a href="../../../../articles/c/h/a/File:Challenge_Yourself.jpg.html" class="image"><img alt="Challenge Yourself.jpg" src="../../../../images/thumb2F/5/2F//5/59/Challenge_Yourself.jpg/200px-Challenge_Yourself.jpg" width="200" height="205" /></a>
+</p>
+</td>
+<td>
+<p><b>(1)</b> In the loop, use serial to print the numbers 1 to 10 to your computer.
+</p>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Making_a_Sensor"> Making a Sensor </span></h2>
+<p>The sensor is based upon a light dependent resistor, which (as the name suggests) changes its electrical resistance with the amount of light hitting it. They look like this:
+<a href="../../../../articles/l/d/r/File:LDR.jpg.html" class="image"><img alt="LDR.jpg" src="../../../../images/thumb2F/3/2F//3/32/LDR.jpg/300px-LDR.jpg" width="300" height="163" /></a>
+</p><p>A potential divider circuit is used to convert the light sensor's varying resistance into a varying voltage. If you don't know what this is, please check out <a rel="nofollow" class="external text" href="http://www.doctronics.co.uk/voltage.htm">this explanation</a>. Here are two photos of the potential divider set up, one using the breadboard, and one without it.
+</p><p><a href="../../../../articles/l/d/r/File:LDR_No_Breadboard.jpg.html" class="image"><img alt="LDR No Breadboard.jpg" src="../../../../images/thumb2F/4/2F//4/4c/LDR_No_Breadboard.jpg/225px-LDR_No_Breadboard.jpg" width="225" height="300" /></a>
+<a href="../../../../articles/l/d/r/File:LDR_Breadboard.jpg.html" class="image"><img alt="LDR Breadboard.jpg" src="../../../../images/thumb2F/4/2F//4/41/LDR_Breadboard.jpg/400px-LDR_Breadboard.jpg" width="400" height="300" /></a>
+</p>
+<h2> <span class="mw-headline" id="Reading_Analog_Signals"> Reading Analog Signals </span></h2>
+<p>Analog signals can be read from 6 inputs (labelled A0 to A5). We have plugged the sensor into pin A0, so to read the signal we do this:
+</p>
+<pre>int reading = analogRead(0);
+</pre>
+<p>The reading variable will then contain a number between 0 and 1023, where 0 represents 0V, 1023 represents 5V. A value of 512 therefore represents 2.5V.
+</p>
+<table class="wikitable" width="600px">
+
+<tr>
+<td>
+<p><a href="../../../../articles/c/h/a/File:Challenge_Yourself.jpg.html" class="image"><img alt="Challenge Yourself.jpg" src="../../../../images/thumb2F/5/2F//5/59/Challenge_Yourself.jpg/200px-Challenge_Yourself.jpg" width="200" height="205" /></a>
+</p>
+</td>
+<td>
+<p><b>(1)</b> Print analog readings over the serial port to your computer. (Make sure you have a delay between measurements!)
+</p><p><b>(2)</b> Convert the reading to a voltage using maths and print that over serial instead.
+</p><p><b>(3)</b> Instead of the reading value, print a bar of # symbols who's length is proportional to the voltage reading
+</p>
+</td></tr></table>
+<h2> <span class="mw-headline" id="Detecting_Dots_and_Dashes"> Detecting Dots and Dashes </span></h2>
+<p>When the light from an LED hits your LDR you should receive a high voltage reading. It should be a low voltage reading when there is no light landing on your LDR. Have a friend program their Arduino to send the "SOS" morse code using their LED, point that at your LDR and record the max and min analog readings you get (corresponding to the LED being on and off respectively). Then paste this function into your Arduino code:
+</p>
+<pre><span style="color:#800000; font-weight:bold;">int</span> threshold <span style="color:#808030;">=</span> <span style="color:#008c00;">512</span><span style="color:#800080;">;</span>
+
+boolean isLedOn<span style="color:#808030;">(</span><span style="color:#808030;">)</span> <span style="color:#800080;">{</span>
+  <span style="color:#800000; font-weight:bold;">int</span> reading <span style="color:#808030;">=</span> analogRead<span style="color:#808030;">(</span><span style="color:#008c00;">0</span><span style="color:#808030;">)</span><span style="color:#800080;">;</span>
+  <span style="color:#800000; font-weight:bold;">if</span><span style="color:#808030;">(</span>reading <span style="color:#808030;">&lt;</span> threshold<span style="color:#808030;">)</span> <span style="color:#800080;">{</span>
+    <span style="color:#800000; font-weight:bold;">return</span> <span style="color:#800000; font-weight:bold;">false</span><span style="color:#800080;">;</span>
+  <span style="color:#800080;">}</span> <span style="color:#800000; font-weight:bold;">else</span> <span style="color:#800080;">{</span>
+    <span style="color:#800000; font-weight:bold;">return</span> <span style="color:#800000; font-weight:bold;">true</span><span style="color:#800080;">;</span>
+  <span style="color:#800080;">}</span>
+<span style="color:#800080;">}</span>
+</pre>
+<p>This function returns true if your reading was above the threshold, and false if it was below. Copy the whole code below and change the threshold value to be between your min and max readings.
+</p>
+<pre><span style="color:#800000; font-weight:bold;">void</span> setup<span style="color:#808030;">(</span><span style="color:#808030;">)</span> <span style="color:#800080;">{</span>
+  Serial<span style="color:#808030;">.</span>begin<span style="color:#808030;">(</span><span style="color:#008c00;">9600</span><span style="color:#808030;">)</span><span style="color:#800080;">;</span>
+<span style="color:#800080;">}</span>
+
+<span style="color:#800000; font-weight:bold;">void</span> loop<span style="color:#808030;">(</span><span style="color:#808030;">)</span> <span style="color:#800080;">{</span>
+  <span style="color:#800000; font-weight:bold;">if</span><span style="color:#808030;">(</span>ledIsOn<span style="color:#808030;">(</span><span style="color:#808030;">)</span><span style="color:#808030;">)</span> <span style="color:#800080;">{</span>
+    Serial<span style="color:#808030;">.</span>println<span style="color:#808030;">(</span><span style="color:#800000;">"</span><span style="color:#0000e6;">#</span><span style="color:#800000;">"</span><span style="color:#808030;">)</span><span style="color:#800080;">;</span>
+  <span style="color:#800080;">}</span> <span style="color:#800000; font-weight:bold;">else</span> <span style="color:#800080;">{</span>
+    Serial<span style="color:#808030;">.</span>println<span style="color:#808030;">(</span><span style="color:#800000;">"</span><span style="color:#0000e6;">-</span><span style="color:#800000;">"</span><span style="color:#808030;">)</span><span style="color:#800080;">;</span>
+  <span style="color:#800080;">}</span>
+  delay<span style="color:#808030;">(</span><span style="color:#008c00;">100</span><span style="color:#808030;">)</span><span style="color:#800080;">;</span>
+<span style="color:#800080;">}</span>
+
+<span style="color:#800000; font-weight:bold;">int</span> threshold <span style="color:#808030;">=</span> <span style="color:#008c00;">CHANGE_TO_THRESHOLD</span><span style="color:#800080;">;</span>
+
+boolean ledIsOn<span style="color:#808030;">(</span><span style="color:#808030;">)</span> <span style="color:#800080;">{</span>
+  <span style="color:#800000; font-weight:bold;">int</span> reading <span style="color:#808030;">=</span> analogRead<span style="color:#808030;">(</span><span style="color:#008c00;">0</span><span style="color:#808030;">)</span><span style="color:#800080;">;</span>
+  <span style="color:#800000; font-weight:bold;">if</span><span style="color:#808030;">(</span>reading <span style="color:#808030;">&lt;</span> threshold<span style="color:#808030;">)</span> <span style="color:#800080;">{</span>
+    <span style="color:#800000; font-weight:bold;">return</span> <span style="color:#800000; font-weight:bold;">false</span><span style="color:#800080;">;</span>
+  <span style="color:#800080;">}</span> <span style="color:#800000; font-weight:bold;">else</span> <span style="color:#800080;">{</span>
+    <span style="color:#800000; font-weight:bold;">return</span> <span style="color:#800000; font-weight:bold;">true</span><span style="color:#800080;">;</span>
+  <span style="color:#800080;">}</span>
+<span style="color:#800080;">}</span>
+</pre>
+<!-- 
+NewPP limit report
+Preprocessor visited node count: 145/1000000
+Preprocessor generated node count: 282/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/40
+Expensive parser function count: 0/100
+-->
+</div><div class="printfooter">
+Retrieved from "<a href="http://wiki.emfcamp.org/w/index.php?title=Arduino_Workshop_for_the_Curious/Lesson4&amp;oldid=2824">http://wiki.emfcamp.org/w/index.php?title=Arduino_Workshop_for_the_Curious/Lesson4&amp;oldid=2824</a>"</div>
+		<div id='catlinks' class='catlinks catlinks-allhidden'></div>		<!-- end content -->
+				<div class="visualClear"></div>
+	</div>
+</div></div>
+<div id="column-one">
+	<div id="p-cactions" class="portlet">
+		<h5>Views</h5>
+		<div class="pBody">
+			<ul>
+				<li id="ca-nstab-main" class="selected"><a href="../../../../articles/a/r/d/Arduino_Workshop_for_the_Curious/Lesson4.html" primary="1" context="subject" title="View the content page [c]" accesskey="c">Page</a></li>
+				<li id="ca-talk" class="new"><a href="http://wiki.emfcamp.org/w/index.php?title=Talk:Arduino_Workshop_for_the_Curious/Lesson4&amp;action=edit&amp;redlink=1" primary="1" context="talk" title="Discussion about the content page [t]" accesskey="t">Discussion</a></li>
+				<li id="ca-viewsource"><a href="http://wiki.emfcamp.org/w/index.php?title=Arduino_Workshop_for_the_Curious/Lesson4&amp;action=edit" primary="1" title="This page is protected.&#10;You can view its source [e]" accesskey="e">View source</a></li>
+				<li id="ca-history"><a href="http://wiki.emfcamp.org/w/index.php?title=Arduino_Workshop_for_the_Curious/Lesson4&amp;action=history" rel="archives" title="Past revisions of this page [h]" accesskey="h">History</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-personal">
+		<h5>Personal tools</h5>
+		<div class="pBody">
+			<ul>
+				<li id="pt-createaccount"><a href="http://wiki.emfcamp.org/w/index.php?title=Special:UserLogin&amp;returnto=Arduino+Workshop+for+the+Curious%2FLesson4&amp;type=signup">Create account</a></li>
+				<li id="pt-login"><a href="http://wiki.emfcamp.org/w/index.php?title=Special:UserLogin&amp;returnto=Arduino+Workshop+for+the+Curious%2FLesson4" title="You are encouraged to log in; however, it is not mandatory [o]" accesskey="o">Log in</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="portlet" id="p-logo">
+<a href="../../../../index.html" style="background-image: url(../../../../misc/emf_logo_small.png);" title="Visit the main page"></a>
+	</div>
+	<div class="generated-sidebar portlet" id="p-navigation">
+		<h5>Navigation</h5>
+		<div class='pBody'>
+			<ul>
+				<li id="n-mainpage-description"><a href="../../../../index.html" title="Visit the main page [z]" accesskey="z">Main page</a></li>
+				<li id="n-portal"><a href="../../../../articles/c/o/m/Project:Community_portal.html" title="About the project, what you can do, where to find things">Community portal</a></li>
+				<li id="n-currentevents"><a href="../../../../articles/c/u/r/Project:Current_events.html" title="Find background information on current events">Current events</a></li>
+				<li id="n-recentchanges"><a href="http://wiki.emfcamp.org/wiki/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li>
+				<li id="n-randompage"><a href="http://wiki.emfcamp.org/wiki/Special:Random" title="Load a random page [x]" accesskey="x">Random page</a></li>
+				<li id="n-help"><a href="../../../../articles/c/o/n/Help:Contents.html" title="The place to find out">Help</a></li>
+			</ul>
+		</div>
+	</div>
+	<div id="p-search" class="portlet">
+		<h5><label for="searchInput">Search</label></h5>
+		<div id="searchBody" class="pBody">
+			<form action="/w/index.php" id="searchform">
+				<input type='hidden' name="title" value="Special:Search"/>
+				<input type="search" name="search" title="Search Electromagnetic Field [f]" accesskey="f" id="searchInput" />
+				<input type="submit" name="go" value="Go" title="Go to a page with this exact name if exists" id="searchGoButton" class="searchButton" />&#160;
+				<input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton" />
+			</form>
+		</div>
+	</div>
+	<div class="portlet" id="p-tb">
+		<h5>Toolbox</h5>
+		<div class="pBody">
+			<ul>
+				<li id="t-whatlinkshere"><a href="http://wiki.emfcamp.org/wiki/Special:WhatLinksHere/Arduino_Workshop_for_the_Curious/Lesson4" title="A list of all wiki pages that link here [j]" accesskey="j">What links here</a></li>
+				<li id="t-recentchangeslinked"><a href="http://wiki.emfcamp.org/wiki/Special:RecentChangesLinked/Arduino_Workshop_for_the_Curious/Lesson4" title="Recent changes in pages linked from this page [k]" accesskey="k">Related changes</a></li>
+				<li id="t-specialpages"><a href="http://wiki.emfcamp.org/wiki/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li>
+				<li id="t-print"><a href="http://wiki.emfcamp.org/w/index.php?title=Arduino_Workshop_for_the_Curious/Lesson4&amp;printable=yes" rel="alternate" title="Printable version of this page [p]" accesskey="p">Printable version</a></li>
+				<li id="t-permalink"><a href="http://wiki.emfcamp.org/w/index.php?title=Arduino_Workshop_for_the_Curious/Lesson4&amp;oldid=2824" title="Permanent link to this revision of the page">Permanent link</a></li>
+<li id="t-smwbrowselink"><a href="http://wiki.emfcamp.org/wiki/Special:Browse/Arduino_Workshop_for_the_Curious-2FLesson4" title="Special:Browse/Arduino Workshop for the Curious-2FLesson4">Browse properties</a></li>			</ul>
+		</div>
+	</div>
+</div><!-- end of the left (by default at least) column -->
+<div class="visualClear"></div>
+<div id="footer">
+	<div id="f-copyrightico">
+		<a href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img src="/w/skins/common/images/cc-by-nc-sa.png" alt="Creative Commons Attribution Non-Commercial Share Alike" width="88" height="31" /></a>
+	</div>
+	<div id="f-poweredbyico">
+		<a href="//www.mediawiki.org/"><img src="/w/skins/common/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31" /></a>
+		<a href="http://www.semantic-mediawiki.org/wiki/Semantic_MediaWiki"><img src="/w/extensions/SemanticMediaWiki/skins/images/smw_button.png" alt="Powered by Semantic MediaWiki" width="88" height="31" /></a>
+	</div>
+	<ul id="f-list">
+		<li id="credits">This page was last modified 15:17, 1 September 2012 by Electromagnetic Field user <a href="http://wiki.emfcamp.org/w/index.php?title=User:Harry&amp;action=edit&amp;redlink=1" class="new" title="User:Harry (page does not exist)">Harry</a>. </li>
+		<li id="copyright">Content is available under <a class="external" href="../../../../../COPYING.html">Creative Commons Attribution Non-Commercial Share Alike</a>.</li>
+		<li id="privacy"><a href="../../../../articles/p/r/i/Project:Privacy_policy.html" title="Project:Privacy policy">Privacy policy</a></li>
+		<li id="about"><a href="../../../../articles/a/b/o/Project:About.html" title="Project:About">About Electromagnetic Field</a></li>
+		<li id="disclaimer"><a href="../../../../articles/g/e/n/Project:General_disclaimer.html" title="Project:General disclaimer">Disclaimers</a></li>
+	</ul>
+</div>
+</div>
+<script>if(window.mw){
+mw.loader.state({"site":"loading","user":"missing","user.groups":"ready"});
+}</script>
+
+<script>if(window.mw){
+mw.loader.state({"site":"ready"});
+}</script>
+<!-- Served in 37.153 secs. --></body></html>
